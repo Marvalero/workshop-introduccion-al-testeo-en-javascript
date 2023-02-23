@@ -39,17 +39,21 @@ Un mock permite testear como el codigo se comunica entre si. En el caso de la At
 
 Esto nos da mucha mas flexibilidad en el codigo ya que podriamos modificar distintos ficheros sin miedo a que los tets de otros ficheros fallen.
 
-Como escribir los tests usando mocks. Primero, tenemos que decirle a nuestros test que usen una copia false de `./account.js`.
+Como escribir los tests usando mocks. Primero, tenemos que decirle a nuestros test que usen una copia false de `./account.js`. Podeis ver un ejemplo de [como hacer un mock de una clase en la documentacion de jest](https://jestjs.io/docs/mock-function-api#mockfnmockimplementationfn).
 ```javascript
 const Atm = require('./atm.js');
-require('./account.js');
+const Account = require('./account.js');
+
+jest.mock('./account.js');
 
 let mockGetAmount = jest.fn(() => 0);
 let mockSetAmount = jest.fn(() => {});
-jest.mock('./account.js', () => {
-  return jest.fn().mockImplementation(() => {
-    return { getAmount: mockGetAmount, setAmount: mockSetAmount };
-  });
+
+Account.mockImplementation(() => {
+  return {
+    getAmount: mockGetAmount,
+    setAmount: mockSetAmount
+  };
 });
 ```
 

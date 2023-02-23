@@ -1,12 +1,16 @@
 const Atm = require('./atm.js');
-require('./account.js');
+const Account = require('./account.js');
+
+jest.mock('./account.js');
 
 let mockGetAmount = jest.fn(() => 0);
 let mockSetAmount = jest.fn(() => {});
-jest.mock('./account.js', () => {
-  return jest.fn().mockImplementation(() => {
-    return { getAmount: mockGetAmount, setAmount: mockSetAmount };
-  });
+
+Account.mockImplementation(() => {
+  return {
+    getAmount: mockGetAmount,
+    setAmount: mockSetAmount
+  };
 });
 
 test("When I ask for account information, I expect to get a json with the expected information", () => {
