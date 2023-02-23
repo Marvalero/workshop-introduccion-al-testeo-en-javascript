@@ -17,7 +17,7 @@ Ahora podemos correr nuestros tests para ver que requisitos han cambiado, vemos 
 Primero lo primero: Vamos a arreglar nuestro `account.test.js` ya que si es correcto que fallen porque los requisitos han cambiado:
 
 ```javascript
-test("Given I open an account, When I call getAmount(), Then it returns 0", () => {
+test("Given I open an account, When I call getAmount(), Then it returns 5", () => {
     // Given
     testee = new Account();
 
